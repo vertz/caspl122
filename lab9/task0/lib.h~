@@ -1,0 +1,94 @@
+
+#ifndef LIB_H_NIR
+#define LIB_H_NIR
+#include <elf.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+/**
+ *     get_shdr - get a section header, given a name.
+ *     @name - the name we wish to look for.
+ *     @start - the start of the file's memory map.
+ *
+ *     returns a pointer to the structure of the requested section header.
+ */
+Elf32_Shdr *get_shdr(const char *name, void *start);
+
+
+/* Similar to above, but returns the index of the section header */
+int get_shdr_index(const char *name, void *start);
+
+/**
+ *  get_shdr_from_index - given an index into the section header table,
+ *                        return the requested header.
+ *  @index - the requested index.
+ *  @start - the start of the file's memory map.
+ *
+ *  returns a pointer to the requested section header.
+ */
+Elf32_Shdr *get_shdr_from_index(int index, void *start);
+
+
+/**
+ *  get_section_name - given an index into the section header table, return
+ *                     the associated section's name.
+ *  @index - the requested index.
+ *  @start - the start of the file's memory map.
+ *
+ *  returns a pointer into the section header string table.
+ */
+char *get_section_name(int index, void *start);
+
+
+/**
+ *   get_symbol - given a symbol name, return the appropriate entry
+ *                in the symbol table
+ *   
+ *   @name - the name we wish to look for.
+ *   @start - the start of the file's memory map.
+ *
+ *   returns a pointer into the symbol table.
+ */
+Elf32_Sym *get_symbol(const char *name, void *start);
+
+
+/**
+ *   get_symbol_name - given a symbol structure, return the associated name.
+ *   
+ *   @symbol - a pointer to the symbol structure were looking for.
+ *   @start - the start of the file's memory map.
+ *
+ *   returns a pointer into the string table.
+ */
+char *get_symbol_name(Elf32_Sym  *symbol, void *start);
+
+
+/**
+ *   get_symbol_from_index.
+ *   
+ *   @index - an index into the symbol table.
+ *   @start - the start of the file's memory map.
+ *
+ *   returns a pointer into the symbol table.
+ */
+Elf32_Sym *get_symbol_from_index(int index, void *start);
+
+
+
+/**
+ *   for_all_symbols - perform the func on all symbols.
+ *                     good for repetitive tasks.
+ *
+ *   @start - the start of the file's memory map.
+ *   @func - the function pointer.
+ */
+int for_all_symbols(void *start, int (*func)(void *,Elf32_Sym *));
+
+#endif

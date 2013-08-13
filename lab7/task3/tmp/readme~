@@ -1,0 +1,16 @@
+Task 2b
+entry point is the 24 byte
+
+myview chezi 24 4 
+ 
+mypatch originalchezi 24 4 chezi 24
+
+
+everty time you use mypatch you destroy ntsc/chezi file
+so after each run download it again and than  do chmod  777 ntsc  
+
+Task3
+
+mypatch run 1108 226 ntsc 952
+952 is the location of the function in the original ntsc file (coverted from hexa to decimal)
+if build a new palindrome function you will need to calc again the other 2 numbers (and convert them to decimal!)

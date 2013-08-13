@@ -1,0 +1,5 @@
+Task3
+
+mypatch run 1108 226 ntsc 952
+952 is the location of the function in the original ntsc file (coverted from hexa to decimal)
+if build a new palindrome function you will need to calc again the other 2 numbers (and convert them to decimal!)

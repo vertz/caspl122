@@ -1,0 +1,45 @@
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define FUNC_NUM 3
+
+Display(char* filename){
+	
+}
+
+Modify(char* filename){
+	
+}
+
+Quit(char* filename){
+	exit(0);
+}
+
+int main(int argc, char **argv)
+{
+	int file;
+	int reply;
+	int (*func[FUNC_NUM])(char* filename) = { Display, Modify, Quit };
+
+	if( (file = open(argv[1], 2)) < 0 ) {
+     		 perror("Error in open");
+     		 exit(-1);
+   	}
+	
+	while(1){
+	    printf("File: %s, choose action:\n", argv[1]);
+	    printf("1-Display\n");
+	    printf("2-Modify\n");
+	    printf("3-Quit\n");
+	    printf("\n");
+
+	    scanf("%d", &reply);;
+	    if(reply>0 && reply<=FUNC_NUM){
+		func[reply-1](argv[1]);
+	    }	
+	}
+	
+ 	return 0;
+}
