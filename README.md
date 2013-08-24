@@ -1,7 +1,5 @@
-caspl122
-========
-
 System Programming Laboratory 2012
+========
 
 Lab1 Rudimentary C programming, make files
 
